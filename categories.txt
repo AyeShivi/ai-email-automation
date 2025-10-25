@@ -1,0 +1,33 @@
+ACSC alerts
+Account
+Alert
+Backup Reports
+Barracuda
+CERT-IN Alerts
+Client_Communication
+Client_Support
+CloudSEK
+DNSFilter
+Goutham Goraka
+HR
+Invoice
+Lenovo
+M365 Tickets
+MBIP
+Microsoft
+N-able
+Naveen Kumar
+Newsletters
+Phishing
+Proofpoint Quarantine Digest
+Qualys Maintenace
+Qualys Official
+SOCRadar DarkWeb Updates
+Scalefusion
+Security
+Security_Alert
+Sendmarc
+SentinelOne
+Teams
+Vendor_Support
+Webinar

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Email Category Classifier</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 JS Bundle (required for alerts/close buttons) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body { background: #f4f6fb; }
+        .main-card { margin: 70px auto; max-width: 900px; background: #fff; border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,.12); padding: 38px;}
+        .mb-space { margin-bottom: 22px;}
+        h5 { margin: 22px 0 12px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-card">
+
+            <!-- Bootstrap Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}} alert-dismissible fade show mb-3" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <h3 class="text-primary mb-4 text-center">Email Category Classifier</h3>
+            
+            <!-- Bulk upload first -->
+            <form class="mb-space" action="/classify_bulk" method="post" enctype="multipart/form-data">
+                <label class="form-label">Bulk classification (.zip, .msg or .eml files):</label>
+                <input type="file" class="form-control mb-2" name="bulk_email" accept=".zip,.msg,.eml">
+                <button type="submit" class="btn btn-primary">Classify Bulk Emails</button>
+            </form>
+            
+            <!-- Single email second -->
+            <form class="mb-space" action="/classify" method="post" enctype="multipart/form-data">
+                <label class="form-label">Classify a single email (paste or upload .eml/.msg):</label>
+                <textarea class="form-control mb-2" name="email_text" rows="3" placeholder="Paste email text or leave blank if uploading file"></textarea>
+                <input type="file" class="form-control mb-2" name="email_file" accept=".msg,.eml">
+                <button type="submit" class="btn btn-outline-primary">Classify Single Mail</button>
+            </form>
+            
+            <!-- Category management last -->
+            <h5>Category Management</h5>
+            
+            <!-- Add Category -->
+            <form class="mb-space" action="/add_category" method="post">
+                <label class="form-label">Add New Category</label>
+                <input type="text" class="form-control mb-2" name="new_category" placeholder="Type new category">
+                <button type="submit" class="btn btn-success btn-block">Add Category</button>
+            </form>
+            
+            <!-- Edit Category -->
+            <form class="mb-space" action="/edit_category" method="post">
+                <label class="form-label">Edit Existing Category</label>
+                <div class="row mb-2">
+                    <div class="col">
+                        <select name="old_category" class="form-select">
+                            {% for cat in categories %}
+                            <option value="{{cat}}">{{cat}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="edited_category" placeholder="New name">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-warning btn-block">Edit</button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Delete Category -->
+            <form class="mb-space" action="/delete_category" method="post">
+                <label class="form-label">Delete Category</label>
+                <select name="category" class="form-select mb-2">
+                    {% for cat in categories %}
+                    <option value="{{cat}}">{{cat}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-danger btn-block">Delete Category</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
