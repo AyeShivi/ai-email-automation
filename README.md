@@ -37,5 +37,5 @@ Teams spending time manually sorting high volumes of emails needed an automated 
 ## Author
 
 **Shivangi Kakadiya**  
-Master of Information Technology — Charles Darwin University  
+Master of Information Technology — Charles Darwin University 
 [LinkedIn](https://www.linkedin.com/in/shivangi-kakadiya-b46bb8272/)
